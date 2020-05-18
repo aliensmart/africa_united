@@ -2,6 +2,10 @@
 
 
 {% block content %}
-    
+    <form method="post">
+        {% csrf_token %}
+        <p>Are you sure You want to delete?</p>
+        <input type="submit" claass= "btn btn-danger" value="Confirm">
+    </form>
 {% endblock %}
     
