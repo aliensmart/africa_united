@@ -11,18 +11,18 @@ from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 
 class AboutView(TemplateView):
-    template_name = 'about.html'
+    template_name = 'blog/about.html'
 
 class PostListView(ListView):
     model = Post
 
     def get_queryset(self):
-        return Post.objects.filter(published_date__lte=timezone.now().order_by('-published_date'))
+        return Post.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')
 
 class PostDetailView(DetailView):
     model = Post
 
-class class PostCreateView(CreateView, LoginRequiredMixin):
+class PostCreateView(CreateView, LoginRequiredMixin):
     model = Post
     login_url = '/login/'
     redirect_field_name = 'blog/post_detail.html'
@@ -43,7 +43,7 @@ class DraftListView(ListView):
     redirect_field_name = 'blog/post_list.html'
     login_url = '/login/'
     
-    def def get_queryset(self):
+    def get_queryset(self):
         return Post.objects.filter(published_date__isnull=True).order_by('created_date')
 
 @login_required
